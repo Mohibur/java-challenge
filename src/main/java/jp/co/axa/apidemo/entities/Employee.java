@@ -11,6 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Employee Entity.
+ * 
+ * @author Mohibur Rashid
+ *
+ */
 @Entity
 @Table(name = "EMPLOYEE")
 @ToString

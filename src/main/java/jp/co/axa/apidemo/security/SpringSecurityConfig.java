@@ -6,6 +6,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+/**
+ * @author Mohibur Rashid
+ *
+ */
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     final String API_BASE = "/api/v1/employees";

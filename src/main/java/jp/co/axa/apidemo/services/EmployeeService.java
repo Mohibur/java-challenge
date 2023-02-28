@@ -5,6 +5,12 @@ import jp.co.axa.apidemo.entities.Employee;
 
 import java.util.List;
 
+/**
+ * Handles EmployeeRepository. 
+ * 
+ * @author Mohibur Rashid
+ *
+ */
 public interface EmployeeService {
 
     /**

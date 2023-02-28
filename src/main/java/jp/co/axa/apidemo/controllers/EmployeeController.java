@@ -10,36 +10,42 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Handles All Employee related request
+ * 
+ * @author Mohibur Rashid
+ *
+ */
 @Log4j2
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/employees")
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping("/employees")
+    @GetMapping("")
     public List<Employee> getAllEmployees() {
         return employeeService.findAll();
     }
 
-    @GetMapping("/employees/{employeeId}")
+    @GetMapping("/{employeeId}")
     public Employee getEmployee(@PathVariable(name = "employeeId") Long employeeId) {
         return employeeService.findById(employeeId);
     }
 
-    @PostMapping("/employees")
+    @PostMapping("")
     public void registerEmployee(EmployeeDto employeeDto) {
         employeeService.save(employeeDto);
         log.info("Employee registered successfully.");
     }
 
-    @DeleteMapping("/employees/{employeeId}")
+    @DeleteMapping("/{employeeId}")
     public void deleteEmployee(@PathVariable(name = "employeeId") Long employeeId) {
         employeeService.delete(employeeId);
         log.info("Employee Deleted Successfully. Employee Id: " + employeeId);
     }
 
-    @PutMapping("/employees/{employeeId}")
+    @PutMapping("/{employeeId}")
     public void updateEmployee(@RequestBody EmployeeDto employee, @PathVariable(name = "employeeId") Long employeeId) {
         employeeService.update(employee, employeeId);
         log.info("Employee Update Successfully. Employee Id: " + employeeId);

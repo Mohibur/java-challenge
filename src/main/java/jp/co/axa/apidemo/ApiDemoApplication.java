@@ -6,6 +6,10 @@ import org.springframework.cache.annotation.EnableCaching;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * @author Mohibur Rashid
+ *
+ */
 @EnableSwagger2
 @EnableCaching
 @SpringBootApplication
