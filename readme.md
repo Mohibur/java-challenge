@@ -1,52 +1,84 @@
-### How to use this spring-boot project
+# Added Class and files
 
-- Install packages with `mvn package`
-- Run `mvn spring-boot:run` for starting the application (or use your IDE)
+## jp.co.axa.apidemo.dto.EmployeeDto
+- DTO for Employee entity
 
-Application (with the embedded H2 database) is ready to be used ! You can access the url below for testing it :
+## jp.co.axa.apidemo.exceptions.EmployeeNotFoundException
+- Thrown when Employee not found, with 404 http status code
+## jp.co.axa.apidemo.exceptions.ParameterNotFoundException
+- Thrown when Required parameters not found, with 422 stauts code
 
-- Swagger UI : http://localhost:8080/swagger-ui.html
-- H2 UI : http://localhost:8080/h2-console
+## jp.co.axa.apidemo.mappers.DtoEntityMappers
+- Mappers that offers various mapping bettween structurs;
 
-> Don't forget to set the `JDBC URL` value as `jdbc:h2:mem:testdb` for H2 UI.
+## jp.co.axa.apidemo.security.SpringSecurityConfig
+- A security configuration with SimpleAuthentication mechanism
+- username and passwords
+  1. admin:password
+    - can access all api
+  1. user:password
+    - can access only `/api/v1/employees`
 
+## resources::data.sql
+- Some data to Employee table
 
-
-### Instructions
-
-- download the zip file of this project
-- create a repository in your own github named 'java-challenge'
-- clone your repository in a folder on your machine
-- extract the zip file in this folder
-- commit and push
-
-- Enhance the code in any ways you can see, you are free! Some possibilities:
-  - Add tests
-  - Change syntax
-  - Protect controller end points
-  - Add caching logic for database calls
-  - Improve doc and comments
-  - Fix any bug you might find
-- Edit readme.md and add any comments. It can be about what you did, what you would have done if you had more time, etc.
-- Send us the link of your repository.
-
-#### Restrictions
-- use java 8
+## Test
+- Added test for DtoEntityMappers
+- Added test for EmployeeService
 
 
-#### What we will look for
-- Readability of your code
-- Documentation
-- Comments in your code 
-- Appropriate usage of spring boot
-- Appropriate usage of packages
-- Is the application running as expected
-- No performance issues
+## jp.co.axa.apidemo.dto.EmployeeDto
 
-#### Your experience in Java
+# Updated
 
-Please let us know more about your Java experience in a few sentences. For example:
+## pom.xml
+- Added encoding utf-8 for the entire source code
+- Added mapstruct related configuration.
+- Added devtools for development support
+- Added springboot security 
+- Added plugin to propagate mapstruct
+- Removed version information for lombok, prefer to use version provided by springboot
 
-- I have 3 years experience in Java and I started to use Spring Boot from last year
-- I'm a beginner and just recently learned Spring Boot
-- I know Spring Boot very well and have been using it for many years
+
+## jp.co.axa.apidemo.ApiDemoApplication
+- Changes tab to spaces to match with other java files.
+- enable Caching
+
+
+## jp.co.axa.apidemo.controllers.EmployeeController
+- Removed method `setEmployeeService`. It is unnecessary for two reasons.
+  1. Springboot will autowire the field
+  1. Updating private field of Service alike Object by external agent should be discouraged.
+- Replace `System.out.println` to `log4j2.info` for all methods
+
+## jp.co.axa.apidemo.services.EmployeeService
+- Renamed method `retrieveEmployees` to `findAll` to match with JpaRepository.
+- Renamed method `getEmployee` to `findById` to match with JpaRepository.
+- Renamed method `saveEmployee` to `save` to match with JpaRepository.
+- Renamed method `updateEmployee` to `update`.
+- Added new line at the end
+
+## jp.co.axa.apidemo.services.EmployeeServiceImpl
+- Removed `setEmployeeRepository`. It is unnecessary for two reasons.
+  1. Springboot will autowire the field
+  1. Updating private field of Service alike Object by external agent should be discouraged.
+- Improved `findById`, renamed from `getEmployee`. Returned null instead of throwing exception when value is not available.
+- Renamed `retrieveEmployees` to `findAll`
+- Improved `save`, renamed from `saveEmployee`. Added validation for fields and throw exception if missing. Changed variable from `Employee` to `EmployeeDto`
+- Improved `delete`, renamed from `deleteEmployee`. Added validation for availability of Employee. Throwing exception if not available
+- Improved `update`, renamed from `updateEmployee`. Fixed bug. Added validation for empty string.
+
+## application.property
+- Added Initial Script to insert data to Employee table
+
+
+# What could have been done if I had enough time
+1. Fully implement authorization
+1. Fully implement caching with horizontal expansion cability
+1. Add test on mapper class
+1. Integration test by calling each and individual api
+
+
+# MY experience in Java
+- I have more than 6 years experience with Java (1.8)
+- I have 1 and half years experience of Springboot application development.
